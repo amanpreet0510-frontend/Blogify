@@ -1,0 +1,417 @@
+{
+  "categories": [
+    {
+      "_id": "cat-1",
+      "title": "Technology",
+      "slug": "technology",
+      "description": "Latest in tech, programming, and software development"
+    },
+    {
+      "_id": "cat-2",
+      "title": "Design",
+      "slug": "design",
+      "description": "UI/UX design trends, tips, and inspiration"
+    },
+    {
+      "_id": "cat-3",
+      "title": "Development",
+      "slug": "development",
+      "description": "Web development tutorials and best practices"
+    },
+    {
+      "_id": "cat-4",
+      "title": "Productivity",
+      "slug": "productivity",
+      "description": "Tips for improving your workflow and efficiency"
+    }
+  ],
+  "blogs": [
+    {
+      "_id": "blog-1",
+      "title": "Building Modern Web Applications with Next.js 16",
+      "slug": { "current": "building-modern-web-applications-nextjs-16" },
+      "excerpt": "Explore the latest features in Next.js 16, including improved caching APIs, cache components, and React 19.2 integration for building performant web applications.",
+      "featuredImage": null,
+      "publishedAt": "2026-03-15T10:00:00Z",
+      "author": "Sarah Chen",
+      "categories": [
+        { "_id": "cat-1", "title": "Technology", "slug": "technology" },
+        { "_id": "cat-3", "title": "Development", "slug": "development" }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Next.js 16 brings revolutionary changes to how we build web applications. With the new caching APIs and React 19.2 integration, developers can now create faster, more efficient applications than ever before."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Key Features"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "The new 'use cache' directive allows you to cache pages, components, and functions at the compiler level. This, combined with the new revalidateTag() API that supports stale-while-revalidate behavior, makes building performant applications significantly easier."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Getting Started"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "To start using Next.js 16, simply update your dependencies and enable the cacheComponents flag in your next.config.js. The migration from previous versions is straightforward, with most existing code working without modifications."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "blog-2",
+      "title": "The Art of Minimalist UI Design",
+      "slug": { "current": "art-of-minimalist-ui-design" },
+      "excerpt": "Learn how to create clean, user-friendly interfaces by embracing minimalist design principles. Less is more when it comes to effective UI.",
+      "featuredImage": null,
+      "publishedAt": "2026-03-12T14:30:00Z",
+      "author": "Marcus Rivera",
+      "categories": [
+        { "_id": "cat-2", "title": "Design", "slug": "design" }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Minimalist design is not about removing everything—it's about keeping only what matters. In this post, we'll explore how to create interfaces that are both beautiful and functional."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Core Principles"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "The foundation of minimalist UI lies in three key principles: intentional white space, limited color palette, and clear typography hierarchy. Each element on your screen should serve a purpose."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Practical Application"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Start by auditing your current designs. Remove any decorative elements that don't contribute to user understanding or task completion. Focus on creating clear visual hierarchies through size, weight, and spacing rather than color or decoration."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "blog-3",
+      "title": "TypeScript Best Practices for 2026",
+      "slug": { "current": "typescript-best-practices-2026" },
+      "excerpt": "Master TypeScript with these essential best practices. From strict mode to advanced type patterns, elevate your code quality.",
+      "featuredImage": null,
+      "publishedAt": "2026-03-10T09:00:00Z",
+      "author": "Emily Watson",
+      "categories": [
+        { "_id": "cat-3", "title": "Development", "slug": "development" }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "TypeScript continues to evolve, and with it, the best practices for writing maintainable, type-safe code. In 2026, these patterns have become essential for professional development."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Strict Mode is Non-Negotiable"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Always enable strict mode in your tsconfig.json. This catches potential errors at compile time rather than runtime, saving countless hours of debugging."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Leverage Type Inference"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "TypeScript's type inference is powerful. Don't over-annotate your code—let the compiler do its job while adding explicit types where they improve readability or catch errors."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "blog-4",
+      "title": "Mastering Your Developer Workflow",
+      "slug": { "current": "mastering-developer-workflow" },
+      "excerpt": "Optimize your development environment and workflow for maximum productivity. From keyboard shortcuts to automation scripts.",
+      "featuredImage": null,
+      "publishedAt": "2026-03-08T11:00:00Z",
+      "author": "Alex Kim",
+      "categories": [
+        { "_id": "cat-4", "title": "Productivity", "slug": "productivity" },
+        { "_id": "cat-3", "title": "Development", "slug": "development" }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "A well-optimized workflow can dramatically increase your productivity. Small improvements compound over time, leading to significant gains in output quality and speed."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Automate Repetitive Tasks"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "If you find yourself doing the same thing more than twice, automate it. Use npm scripts, shell aliases, or dedicated automation tools to handle repetitive tasks."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Master Your Editor"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Invest time in learning your editor's keyboard shortcuts and extensions. VS Code, for instance, has hundreds of shortcuts that can save you hours each week."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "blog-5",
+      "title": "Understanding React Server Components",
+      "slug": { "current": "understanding-react-server-components" },
+      "excerpt": "Deep dive into React Server Components and how they change the way we think about rendering and data fetching in React applications.",
+      "featuredImage": null,
+      "publishedAt": "2026-03-05T16:00:00Z",
+      "author": "Sarah Chen",
+      "categories": [
+        { "_id": "cat-1", "title": "Technology", "slug": "technology" },
+        { "_id": "cat-3", "title": "Development", "slug": "development" }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "React Server Components represent a paradigm shift in how we build React applications. By rendering on the server, we can reduce bundle sizes and improve performance significantly."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Server vs Client Components"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Server Components run only on the server and can directly access databases, file systems, and other server resources. Client Components add interactivity and can use hooks and browser APIs."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "When to Use Each"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Use Server Components by default for static content and data fetching. Switch to Client Components only when you need interactivity, event handlers, or browser-specific APIs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "blog-6",
+      "title": "Color Theory for Digital Designers",
+      "slug": { "current": "color-theory-digital-designers" },
+      "excerpt": "A comprehensive guide to applying color theory principles in digital design. Create harmonious color palettes that enhance user experience.",
+      "featuredImage": null,
+      "publishedAt": "2026-03-01T13:00:00Z",
+      "author": "Marcus Rivera",
+      "categories": [
+        { "_id": "cat-2", "title": "Design", "slug": "design" }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Color is one of the most powerful tools in a designer's arsenal. Understanding color theory allows you to create interfaces that evoke specific emotions and guide user behavior."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "The Psychology of Color"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Different colors evoke different emotions. Blue conveys trust and stability, while orange suggests energy and enthusiasm. Consider your brand personality when selecting your primary color."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Building Palettes"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Start with your primary color and build out using complementary, analogous, or triadic schemes. Remember to include neutrals and ensure sufficient contrast for accessibility."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

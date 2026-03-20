@@ -20,7 +20,7 @@ export function Header() {
             Articles
           </Link>
           <Link
-            href="#"
+            href="/about"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             About

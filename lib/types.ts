@@ -41,3 +41,12 @@ export interface SanityImage {
 export interface BlogSlug {
   slug: string;
 }
+
+//About page type
+export interface About{
+   _id: string;
+  title: string;
+  excerpt:string;
+  slug: string;
+  description?: string;
+}

@@ -5,8 +5,9 @@ import {
   allBlogSlugsQuery,
   allCategoriesQuery,
   relatedPostsQuery,
+  allAboutQuery
 } from "./queries";
-import type { BlogPost, BlogPostFull, BlogSlug, Category } from "./types";
+import type { BlogPost, BlogPostFull, BlogSlug, Category,About } from "./types";
 import fallbackBlogs from "@/data/blogs.json";
 
 // Get all blogs with CMS fallback
@@ -78,6 +79,23 @@ export async function getAllCategories(): Promise<Category[]> {
     return fallbackBlogs.categories as Category[];
   }
 }
+
+//Get about page
+export async function getAboutPage(): Promise<About[]> {
+  const client = getSanityClient();
+  if (!client) {
+    return [] ;
+  }
+
+  try {
+    const about = await client.fetch<About[]>(allAboutQuery);
+    return about;
+  } catch (error) {
+    console.error("Error fetching aboutPage from Sanity:", error);
+    return [];
+  }
+}
+
 
 // Get related posts
 export async function getRelatedPosts(

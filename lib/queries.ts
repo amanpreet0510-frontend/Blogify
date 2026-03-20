@@ -102,3 +102,15 @@ export const searchBlogsQuery = `
     }
   }
 `;
+
+//About page query 
+export const allAboutQuery = `
+  *[_type == "about"] | order(title asc) {
+    _id,
+    title,
+    excerpt,
+    "slug": slug.current,
+    description,
+    featuredImage
+  }
+`;

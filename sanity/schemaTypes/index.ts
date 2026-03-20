@@ -1,5 +1,7 @@
-import { blog } from "./blog";
-import { category } from "./category";
+import { type SchemaTypeDefinition } from 'sanity'
+import { blog } from './blog'
+import { category } from './category'
 
-// Export all schema types
-export const schemaTypes = [blog, category];
+export const schema: { types: SchemaTypeDefinition[] } = {
+  types: [blog, category],
+}

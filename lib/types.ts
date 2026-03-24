@@ -43,10 +43,108 @@ export interface BlogSlug {
 }
 
 //About page type
-export interface About{
-   _id: string;
+export interface About {
+  _id: string;
   title: string;
-  excerpt:string;
+  excerpt: string;
   slug: string;
   description?: string;
+}
+
+//Header type
+export interface Header {
+  title: string;
+  logoUrl: string;
+  navigation: {
+    label: string;
+    link: string;
+    openInNewTab: boolean;
+  }[];
+  cta: {
+    label: string;
+    link: string;
+  };
+  socialIcons: {
+    iconUrl: string;
+    link: string;
+    openInNewTab: boolean;
+  }[];
+}
+
+//Hero Section type
+export interface Herosection {
+  _id: string;
+  title: string;
+  excerpt: string;
+  slug: string;
+  description?: string;
+  backgroundImage: SanityImage;
+  blogs?: BlogPost[];
+}
+
+//Brands section type
+
+export interface Brands {
+  title: string;
+  brandLogos: {
+    iconUrl: string;
+    link: string;
+    openInNewTab: boolean;
+  }[];
+}
+
+//Social section type
+
+export interface Socials {
+  title: string;
+  socialIcons: {
+    title:string;
+    iconUrl: string;
+    link: string;
+    openInNewTab: boolean;
+  }[];
+  featuredImages: {
+    imageUrl: string;
+    link: string;
+    openInNewTab: boolean;
+  }[];
+}
+
+
+//page type
+
+export type Section = Herosection | Brands | Socials;
+
+export interface Page {
+  _id: string;
+  title: string;
+  sections: Section[];
+}
+
+//Footer type
+export interface Footer {
+  title: string;
+  featuredImage: string;
+  description: string;
+  linkColumns: {
+    title: string;
+    links: {
+      label: string;
+      url: string;
+    }[];
+  }[];
+  newsletter: {
+    title: string;
+    emailLabel: string;
+    placeholder: string;
+    checkboxText: string;
+    isCheckboxRequired: boolean;
+    buttonText: string;
+  };
+  socialIcons: {
+    iconUrl: string;
+    link: string;
+    openInNewTab: boolean;
+  }[];
+  copyright: string;
 }

@@ -140,6 +140,9 @@ importers:
       input-otp:
         specifier: 1.4.2
         version: 1.4.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      keen-slider:
+        specifier: ^6.8.6
+        version: 6.8.6
       lucide-react:
         specifier: ^0.564.0
         version: 0.564.0(react@19.2.4)
@@ -164,6 +167,9 @@ importers:
       react-hook-form:
         specifier: ^7.54.1
         version: 7.71.1(react@19.2.4)
+      react-icons:
+        specifier: ^5.6.0
+        version: 5.6.0(react@19.2.4)
       react-resizable-panels:
         specifier: ^2.1.7
         version: 2.1.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -179,6 +185,9 @@ importers:
       styled-components:
         specifier: ^6.3.12
         version: 6.3.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      swiper:
+        specifier: ^12.1.2
+        version: 12.1.2
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.4.0
@@ -4623,6 +4632,9 @@ packages:
   jsonify@0.0.1:
     resolution: {integrity: sha512-2/Ki0GcmuqSrgFyelQq9M05y7PS0mEwuIzrf3f1fPqkVDVRvZrPZtVSMHxdgo8Aq0sxAOb/cr2aqqA3LeWHVPg==}
 
+  keen-slider@6.8.6:
+    resolution: {integrity: sha512-dcEQ7GDBpCjUQA8XZeWh3oBBLLmyn8aoeIQFGL/NTVkoEOsmlnXqA4QykUm/SncolAZYGsEk/PfUhLZ7mwMM2w==}
+
   kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
@@ -5273,6 +5285,11 @@ packages:
       typescript:
         optional: true
 
+  react-icons@5.6.0:
+    resolution: {integrity: sha512-RH93p5ki6LfOiIt0UtDyNg/cee+HLVR6cHHtW3wALfo+eOHTp8RnU2kRkI6E+H19zMIs03DyxUG/GfZMOGvmiA==}
+    peerDependencies:
+      react: '*'
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -5695,6 +5712,10 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  swiper@12.1.2:
+    resolution: {integrity: sha512-4gILrI3vXZqoZh71I1PALqukCFgk+gpOwe1tOvz5uE9kHtl2gTDzmYflYCwWvR4LOvCrJi6UEEU+gnuW5BtkgQ==}
+    engines: {node: '>= 4.7.0'}
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
@@ -11049,6 +11070,8 @@ snapshots:
 
   jsonify@0.0.1: {}
 
+  keen-slider@6.8.6: {}
+
   kind-of@6.0.3: {}
 
   lambda-runtimes@2.0.5: {}
@@ -11650,6 +11673,10 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
       typescript: 5.7.3
 
+  react-icons@5.6.0(react@19.2.4):
+    dependencies:
+      react: 19.2.4
+
   react-is@16.13.1: {}
 
   react-is@18.3.1: {}
@@ -12242,6 +12269,8 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  swiper@12.1.2: {}
 
   symbol-tree@3.2.4: {}
 

@@ -14,8 +14,10 @@ interface BlogListProps {
 }
 
 export function BlogList({ blogs, categories }: BlogListProps) {
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
 
   // Filter blogs based on search and category
   const filteredBlogs = useMemo(() => {
@@ -43,7 +45,7 @@ export function BlogList({ blogs, categories }: BlogListProps) {
   const hasActiveFilters = searchQuery !== "" || selectedCategory !== null;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 container">
       {/* Search and Filter Section */}
       <div className="space-y-4">
         {/* Search Input */}
@@ -119,9 +121,9 @@ export function BlogList({ blogs, categories }: BlogListProps) {
 
       {/* Blog Grid */}
       {filteredBlogs.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
           {filteredBlogs.map((blog) => (
-            <BlogCard key={blog._id} blog={blog} />
+            <BlogCard key={blog._id} blog={blog} height={100} width={100} />
           ))}
         </div>
       ) : (

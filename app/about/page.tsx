@@ -1,6 +1,6 @@
 import React from "react";
-import { Header } from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Header } from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import {getAboutPage} from "@/lib/getBlogs";
 
 export default async  function AboutPage() {
@@ -8,12 +8,8 @@ const [aboutData] = await Promise.all([
     getAboutPage()
   ]);
 
-  console.log('aboutData', aboutData)
-
   return (
  <div className="min-h-screen bg-background">
-      <Header />
-
       {aboutData?.map((item)=><>
     <main className="min-h-screen bg-white text-gray-800 px-6 py-12">
       <div className="max-w-4xl mx-auto">
@@ -54,9 +50,6 @@ const [aboutData] = await Promise.all([
             Tailwind CSS, and a headless CMS for content management.
           </p>
         </section>
-
-        {/* Footer*/}
-         <Footer/>
       </div>
     </main>
     </>)}

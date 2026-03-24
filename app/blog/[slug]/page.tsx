@@ -2,9 +2,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
-import { BlogContent } from "@/components/BlogContent";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { Header } from "@/components/layout/Header";
+import { BlogContent } from "@/components/blog/BlogContent";
+import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CalendarDays, User, Clock } from "lucide-react";
@@ -92,8 +92,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-
       <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
         {/* Back Button */}
         <Link href="/">
@@ -153,7 +151,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         {blog.featuredImage && (
           <div className="relative mb-10 aspect-video overflow-hidden rounded-xl">
             <Image
-              src={urlFor(blog.featuredImage).width(1200).height(675).url()}
+              src={urlFor(blog.featuredImage)}
               alt={blog.featuredImage.alt || blog.title}
               fill
               className="object-cover"
@@ -176,28 +174,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
         {/* Related Posts */}
         <RelatedPosts posts={relatedPosts} />
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-border/50 bg-card/30">
-        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-sm text-muted-foreground">
-              DevBlog - Built with Next.js and Sanity CMS
-            </p>
-            <div className="flex gap-4 text-sm text-muted-foreground">
-              <a href="#" className="transition-colors hover:text-foreground">
-                Twitter
-              </a>
-              <a href="#" className="transition-colors hover:text-foreground">
-                GitHub
-              </a>
-              <a href="#" className="transition-colors hover:text-foreground">
-                RSS
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

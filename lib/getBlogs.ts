@@ -5,8 +5,12 @@ import {
   allBlogSlugsQuery,
   allCategoriesQuery,
   relatedPostsQuery,
+  allAboutQuery,
+  headerQuery,
+  pageQuery,
+  footerQuery
 } from "./queries";
-import type { BlogPost, BlogPostFull, BlogSlug, Category } from "./types";
+import type { BlogPost, BlogPostFull, BlogSlug, Category,About,Header,Herosection,Brands,Page,Footer } from "./types";
 import fallbackBlogs from "@/data/blogs.json";
 
 // Get all blogs with CMS fallback
@@ -76,6 +80,69 @@ export async function getAllCategories(): Promise<Category[]> {
   } catch (error) {
     console.error("Error fetching categories from Sanity:", error);
     return fallbackBlogs.categories as Category[];
+  }
+}
+
+//Get about page
+export async function getAboutPage(): Promise<About[]> {
+  const client = getSanityClient();
+  if (!client) {
+    return [] ;
+  }
+
+  try {
+    const about = await client.fetch<About[]>(allAboutQuery);
+    return about;
+  } catch (error) {
+    console.error("Error fetching aboutPage from Sanity:", error);
+    return [];
+  }
+}
+
+//Get header
+export async function getHeader(): Promise<Header | null> {
+  const client = getSanityClient();
+  if (!client) {
+    return null;
+  }
+
+  try {
+    const header = await client.fetch<Header>(headerQuery);
+    return header;
+  } catch (error) {
+    console.error("Error fetching header from Sanity:", error);
+    return null;
+  }
+}
+
+//page query
+export async function getPage(): Promise<Page | null> {
+  const client = getSanityClient();
+  if (!client) return null;
+
+  try {
+    const page = await client.fetch<Page>(pageQuery);
+    console.log('page', page)
+    return page;
+  } catch (error) { 
+    console.error("Error fetching page:", error);
+    return null;
+  }
+}
+
+//get footer
+export async function getFooter(): Promise<Footer | null> {
+  const client = getSanityClient();
+  if (!client) {
+    return null;
+  }
+
+  try {
+    const footer = await client.fetch<Footer>(footerQuery);
+    return footer;
+  } catch (error) {
+    console.error("Error fetching footer from Sanity:", error);
+    return null;
   }
 }
 

@@ -8,23 +8,27 @@ import { urlFor } from "@/lib/sanityClient";
 
 interface BlogCardProps {
   blog: BlogPost;
+  height:Number;
+  width:Number;
 }
 
 export function BlogCard({ blog }: BlogCardProps) {
-  const formattedDate = new Date(blog.publishedAt).toLocaleDateString("en-US", {
+  const formattedDate = new Date(blog.publishedAt)?.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
+ 
+
   return (
     <Link href={`/blog/${blog.slug.current}`}>
       <Card className="group h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
         {/* Featured Image */}
-        <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+        <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
           {blog.featuredImage ? (
             <Image
-              src={urlFor(blog.featuredImage).width(600).height(375).url()}
+              src={urlFor(blog.featuredImage)}
               alt={blog.featuredImage.alt || blog.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Search, X } from "lucide-react";
 import { BlogCard } from "./BlogCard";
 import type { BlogPost, Category } from "@/lib/types";
@@ -11,9 +10,10 @@ import type { BlogPost, Category } from "@/lib/types";
 interface BlogListProps {
   blogs: BlogPost[];
   categories: Category[];
+  showSearch?: boolean;
 }
 
-export function BlogList({ blogs, categories }: BlogListProps) {
+export function BlogList({ blogs, categories, showSearch = true }: BlogListProps) {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -45,9 +45,9 @@ export function BlogList({ blogs, categories }: BlogListProps) {
   const hasActiveFilters = searchQuery !== "" || selectedCategory !== null;
 
   return (
-    <div className="space-y-8 container">
+    <div className="container">
       {/* Search and Filter Section */}
-      <div className="space-y-4">
+      {showSearch !== false && <div className="space-y-4">
         {/* Search Input */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -117,7 +117,7 @@ export function BlogList({ blogs, categories }: BlogListProps) {
             </Button>
           )}
         </div>
-      </div>
+      </div>}
 
       {/* Blog Grid */}
       {filteredBlogs.length > 0 ? (

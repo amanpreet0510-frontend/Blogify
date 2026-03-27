@@ -11,7 +11,7 @@ export async function Header() {
 
   
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-border/50 bg-background/80 backdrop-blur-md bg-[#F2F2F2]">
       <div className="container">
         <div className="flex justify-between">
           <div className="mt-5 flex h-16 max-w-6xl px-4 sm:px-6">
@@ -20,10 +20,10 @@ export async function Header() {
                 <img src={header?.logoUrl} />
                 <PenLine className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold tracking-tight">DevBlog</span>
+              <span className="text-xl font-bold tracking-tight text-[#696969] p-1">Blogify</span>
             </Link>
           </div>
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-10 text-[#696969]">
             {header?.navigation?.map((item, index) => {
               return (
                 <nav key={index} className="flex items-center gap-1">
@@ -41,7 +41,7 @@ export async function Header() {
               {header?.cta?.label}
             </Button>
           </div>
-          <div className="flex justify-between mt-5 gap-7">
+          <div className="flex justify-between mt-5 gap-7 pt-3 text-[#696969]">
             {header?.socialIcons?.map((item, index) => (
               <Link
                 key={index}

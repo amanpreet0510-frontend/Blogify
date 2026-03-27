@@ -130,6 +130,11 @@
   padding: 0 1rem;
 }
 
+.footer-section {
+  background-color: #696969 !important;
+  color: white !important;
+}
+
 
 [class^="number-slide"],
 [class*=" number-slide"] {

@@ -9,6 +9,8 @@ const SocialWrapper = async () => {
   const PageData = await getPage();
   if (!PageData) return null;
 
+  
+
  const social = PageData.sections.find(
     (section) => section._type === "socials"
   );

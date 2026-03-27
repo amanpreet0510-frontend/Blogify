@@ -1,58 +1,60 @@
 import React from "react";
-import { Header } from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import {getAboutPage} from "@/lib/getBlogs";
+import { BlogContent } from "@/components/blog/BlogContent";
+import { getAboutPage } from "@/lib/getBlogs";
+import Image from "next/image";
 
-export default async  function AboutPage() {
-const [aboutData] = await Promise.all([
+export default async function AboutPage() {
+  const [aboutData] = await Promise.all([
     getAboutPage()
   ]);
 
+  console.log('aboutData', aboutData)
+
   return (
- <div className="min-h-screen bg-background">
-      {aboutData?.map((item)=><>
-    <main className="min-h-screen bg-white text-gray-800 px-6 py-12">
-      <div className="max-w-4xl mx-auto">
-        
-        {/* Heading */}
-        <h1 className="text-4xl font-bold mb-6">
-          {item?.title}
-        </h1>
+    <div className=" bg-background text-foreground">
+      {aboutData?.map((item) => (
+        <main key={item._id} className=" bg-white text-gray-800 px-6 py-12">
+          <div className="max-w-4xl mx-auto  flex justify-between gap-15">
+            <div>
+              {/* Heading */}
+              <h1 className="text-4xl font-bold mb-6">
+                {item?.title}
+              </h1>
 
-        {/* Intro */}
-        <p className="text-lg mb-4">
-          {item?.excerpt}<span className="font-semibold">Blogify</span> 
-        </p>
+              {/* Main Content (Rich Text) */}
+              {item?.content && (
+                <section className="mt-8 prose prose-blue max-w-sm">
+                  <BlogContent content={item.content} />
+                </section>
+              )}
+            </div>
+            <div>
+              {/* Featured Image */}
+              {item?.featuredImage && (
+                <div className="relative  w-full mb-8 overflow-hidden shadow-lg mt-20">
+                  <Image
+                    src={typeof item.featuredImage === 'string' ? item.featuredImage : ""}
+                    alt={item.title}
+                    className="object-cover"
+                    priority
+                    height={500}
+                    width={500}
+                  />
+                </div>
+              )}
+            </div>
+            </div>
+            {/* Mission / Description */}
+            {item?.description && (
+              <section className="mt-8 mb-12">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+              </section>
+            )}
 
-        {/* Mission */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-semibold mb-2">Our Mission</h2>
-          <p>{item?.description}
-          </p>
-        </section>
-
-        {/* What we offer */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-semibold mb-2">What We Offer</h2>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>📝 Easy blog publishing</li>
-            <li>⚡ Fast and optimized performance</li>
-            <li>📱 Responsive design</li>
-            <li>🔍 SEO-friendly content structure</li>
-          </ul>
-        </section>
-
-        {/* Tech stack */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-semibold mb-2">Built With</h2>
-          <p>
-            This platform is built using modern technologies like Next.js,
-            Tailwind CSS, and a headless CMS for content management.
-          </p>
-        </section>
-      </div>
-    </main>
-    </>)}
-     </div>
+        </main>
+      ))}
+    </div>
   );
 }

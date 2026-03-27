@@ -16,10 +16,11 @@ export interface BlogPost {
     current: string;
   };
   excerpt?: string;
-  featuredImage?: SanityImage;
+  featuredImage?: SanityImage | null;
   publishedAt: string;
   author: string;
   categories?: Category[];
+  showSearch?: boolean;
 }
 
 // Full blog type with content
@@ -49,6 +50,26 @@ export interface About {
   excerpt: string;
   slug: string;
   description?: string;
+  featuredImage?: SanityImage;
+  content: PortableTextBlock[];
+}
+
+//Travel page type
+export interface Travel {
+  _id: string;
+  title: string;
+  excerpt: string;
+  slug: string;
+  blogs?: BlogPost[];
+}
+
+//Eat page type
+export interface Eat {
+  _id: string;
+  title: string;
+  excerpt: string;
+  slug: string;
+  blogs?: BlogPost[];
 }
 
 //Header type
@@ -73,6 +94,7 @@ export interface Header {
 
 //Hero Section type
 export interface Herosection {
+  _type: "heroSection";
   _id: string;
   title: string;
   excerpt: string;
@@ -85,6 +107,7 @@ export interface Herosection {
 //Brands section type
 
 export interface Brands {
+  _type: "brands";
   title: string;
   brandLogos: {
     iconUrl: string;
@@ -96,6 +119,7 @@ export interface Brands {
 //Social section type
 
 export interface Socials {
+  _type: "socials";
   title: string;
   socialIcons: {
     title:string;
@@ -148,3 +172,24 @@ export interface Footer {
   }[];
   copyright: string;
 }
+
+// Video type
+export interface Video {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  thumbnail: string;
+  videoUrl: string;
+  category: string;
+}
+
+// Video Page type
+export interface VideoPage {
+  _id: string;
+  title: string;
+  description: string;
+  featuredVideo: Video;
+}
+

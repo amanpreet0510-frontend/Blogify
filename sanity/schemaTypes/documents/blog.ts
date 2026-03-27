@@ -126,6 +126,13 @@ export const blog = defineType({
       type: "array",
       of: [{ type: "reference", to: [{ type: "category" }] }],
     }),
+    defineField({
+      name: "showSearch",
+      title: "Show Search",
+      type: "boolean",
+      description: "Show or hide the search input and category filters on the blog listing page",
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {

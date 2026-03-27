@@ -8,8 +8,12 @@ import {brands} from './sections/brands'
 import {page} from './documents/page'
 import {footer} from './documents/footer'
 import { socials } from './sections/social';
-
+import { travel } from './documents/travel';
+import { eat } from './documents/eat';
+import { video } from './documents/video';
+import { videoPage } from './documents/videoPage';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blog, category,about,header,page,brands,heroSection,footer,socials],
+  types: [blog, category, about, header, page, brands, heroSection, footer, socials, travel, eat, video, videoPage],
 }
+

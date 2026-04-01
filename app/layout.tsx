@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "DevBlog - Explore Ideas & Insights",
   description: "Discover articles about technology, design, development, and productivity. Written by developers, for developers.",
   generator: "v0.app",
+  verification: {
+    google: "yv2PNJogAqp492Xyyz2c6QXpI_EveYjBCF0JVuMrq04",
+  },
   icons: {
     icon: [
       {

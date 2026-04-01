@@ -13,8 +13,8 @@ export async function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-border/50 bg-background/80 backdrop-blur-md bg-[#F2F2F2]">
       <div className="container">
-        <div className="flex justify-between">
-          <div className="mt-5 flex h-16 max-w-6xl px-4 sm:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 py-3">
+          <div className="flex h-16 max-w-6xl items-center">
             <Link href="/" className="flex  gap-2 transition-opacity hover:opacity-80">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
                 <img src={header?.logoUrl} />
@@ -23,7 +23,7 @@ export async function Header() {
               <span className="text-xl font-bold tracking-tight text-[#696969] p-1">Blogify</span>
             </Link>
           </div>
-          <div className="flex items-center gap-10 text-[#696969]">
+          <div className="order-3 flex w-full flex-wrap items-center gap-4 text-[#696969] md:order-2 md:w-auto md:gap-8">
             {header?.navigation?.map((item, index) => {
               return (
                 <nav key={index} className="flex items-center gap-1">
@@ -37,11 +37,11 @@ export async function Header() {
                 </nav>)
             })
             }
-            <Button>
+            <Button className="w-full sm:w-auto">
               {header?.cta?.label}
             </Button>
           </div>
-          <div className="flex justify-between mt-5 gap-7 pt-3 text-[#696969]">
+          <div className="order-2 flex items-center gap-4 text-[#696969] md:order-3 md:gap-6">
             {header?.socialIcons?.map((item, index) => (
               <Link
                 key={index}

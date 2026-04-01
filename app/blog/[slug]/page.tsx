@@ -91,7 +91,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const relatedPosts = await getRelatedPosts(blog._id, categoryIds);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
         {/* Back Button */}
         <Link href="/">

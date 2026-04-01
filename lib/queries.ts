@@ -14,7 +14,8 @@ export const allBlogsQuery = `
       _id,
       title,
       slug
-    }
+    },
+    showSearch
   }
 `;
 
@@ -33,7 +34,8 @@ export const blogBySlugQuery = `
       _id,
       title,
       slug
-    }
+    },
+    showSearch
   }
 `;
 
@@ -58,7 +60,8 @@ export const blogsByCategoryQuery = `
       _id,
       title,
       slug
-    }
+    },
+    showSearch
   }
 `;
 
@@ -99,7 +102,8 @@ export const searchBlogsQuery = `
       _id,
       title,
       slug
-    }
+    },
+    showSearch
   }
 `;
 
@@ -111,7 +115,8 @@ export const allAboutQuery = `
     excerpt,
     "slug": slug.current,
     description,
-    featuredImage
+    "featuredImage": featuredImage.asset->url,
+    content
   }
 `;
 
@@ -153,12 +158,13 @@ export const heroSectionQuery = `
       excerpt,
       "featuredImage": featuredImage.asset->url,
       publishedAt,
-      author
+      author,
+      showSearch
     }
   }
 `;
 
-//Header query
+//Brands query
 export const brandsQuery = `
   *[_type == "brands"][0]{
     title,
@@ -172,7 +178,7 @@ export const brandsQuery = `
 
 //page query
 export const pageQuery = `
-  *[_type == "page" && slug.current == "home"][0]{
+  *[_type == "page" && (slug.current == "/" || slug.current == "home")][0]{
     title,
 
     sections[]{
@@ -190,7 +196,8 @@ export const pageQuery = `
           excerpt,
           "featuredImage": featuredImage.asset->url,
           publishedAt,
-          author
+          author,
+          showSearch
         }
       },
       //brand section
@@ -254,3 +261,83 @@ export const footerQuery = `
     copyright
   }
 `;
+
+//travel query
+export const travelQuery = `
+  *[_type == "travel"][0]{
+    _id,
+    title,
+    excerpt,
+    "slug": slug.current,
+    blogs[]->{
+      _id,
+      title,
+      slug,
+      excerpt,
+      "featuredImage": featuredImage.asset->url,
+      publishedAt,
+      author,
+      categories[]->{
+        _id,
+        title,
+        "slug": slug.current
+      },
+      showSearch
+    }
+  }
+`;
+
+//eat query
+export const eatQuery = `
+  *[_type == "eat"][0]{
+    _id,
+    title,
+    excerpt,
+    "slug": slug.current,
+    blogs[]->{
+      _id,
+      title,
+      slug,
+      excerpt,
+      "featuredImage": featuredImage.asset->url,
+      publishedAt,
+      author,
+      categories[]->{
+        _id,
+        title,
+        "slug": slug.current
+      },
+      showSearch
+    }
+  }
+`;
+
+//video query
+export const videoQuery = `
+  *[_type == "videoPage"][0]{
+    _id,
+    title,
+    description,
+    featuredVideo->{
+      _id,
+      title,
+      "slug": slug.current,
+      "thumbnail": thumbnail.asset->url,
+      videoUrl,
+      category
+    }
+  }
+`;
+
+//video list query
+export const videoListQuery = `
+  *[_type == "video"] | order(_createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    "thumbnail": thumbnail.asset->url,
+    videoUrl,
+    category
+  }
+`;
+

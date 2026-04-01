@@ -8,8 +8,8 @@ import { urlFor } from "@/lib/sanityClient";
 
 interface BlogCardProps {
   blog: BlogPost;
-  height:Number;
-  width:Number;
+  height?: number;
+  width?: number;
 }
 
 export function BlogCard({ blog }: BlogCardProps) {
@@ -23,12 +23,12 @@ export function BlogCard({ blog }: BlogCardProps) {
 
   return (
     <Link href={`/blog/${blog.slug.current}`}>
-      <Card className="group h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
+      <Card className="group h-full overflow-hidden backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
         {/* Featured Image */}
         <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
           {blog.featuredImage ? (
             <Image
-              src={urlFor(blog.featuredImage)}
+              src={urlFor(blog.featuredImage) || ""}
               alt={blog.featuredImage.alt || blog.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"

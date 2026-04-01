@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Header />
-      <main className="min-h-screen">
+      <main className="">
         {children}
       </main>
       <SocialWrapper />

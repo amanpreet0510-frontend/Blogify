@@ -46,7 +46,7 @@ const Brands = ({ brands }: { brands: Brands }) => {
 
   return (
     <>
-    <div className='bg-white rounded-2xl flex justify-between gap-20 p-5 m-10'>
+    <div className='bg-[#F2F2F2] flex justify-between gap-20 py-5 my-5'>
       <div className='text-black text-center items-center flex justify-center ps-10 font-bold'>As featured in</div>
       <hr className='w-1 h-10'/>
       <div ref={sliderRef} className="keen-slider">

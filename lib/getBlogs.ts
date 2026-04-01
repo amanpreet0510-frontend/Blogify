@@ -8,9 +8,13 @@ import {
   allAboutQuery,
   headerQuery,
   pageQuery,
-  footerQuery
+  travelQuery,
+  footerQuery,
+  eatQuery,
+  videoQuery,
+  videoListQuery
 } from "./queries";
-import type { BlogPost, BlogPostFull, BlogSlug, Category,About,Header,Herosection,Brands,Page,Footer } from "./types";
+import type { BlogPost, BlogPostFull, BlogSlug, Category,About,Header,Herosection,Brands,Page,Footer,Travel,Eat,Video,VideoPage } from "./types";
 import fallbackBlogs from "@/data/blogs.json";
 
 // Get all blogs with CMS fallback
@@ -99,6 +103,38 @@ export async function getAboutPage(): Promise<About[]> {
   }
 }
 
+//Get travel page
+export async function getTravelPage(): Promise<Travel | null> {
+  const client = getSanityClient();
+  if (!client) {
+    return null ;
+  }
+
+  try {
+    const travel = await client.fetch<Travel>(travelQuery);
+    return travel;
+  } catch (error) {
+    console.error("Error fetching travelPage from Sanity:", error);
+    return null;
+  }
+}
+
+//Get eat page
+export async function getEatPage(): Promise<Eat | null> {
+  const client = getSanityClient();
+  if (!client) {
+    return null ;
+  }
+
+  try {
+    const eat = await client.fetch<Eat>(eatQuery);
+    return eat;
+  } catch (error) {
+    console.error("Error fetching eatPage from Sanity:", error);
+    return null;
+  }
+}
+
 //Get header
 export async function getHeader(): Promise<Header | null> {
   const client = getSanityClient();
@@ -122,7 +158,6 @@ export async function getPage(): Promise<Page | null> {
 
   try {
     const page = await client.fetch<Page>(pageQuery);
-    console.log('page', page)
     return page;
   } catch (error) { 
     console.error("Error fetching page:", error);
@@ -143,6 +178,38 @@ export async function getFooter(): Promise<Footer | null> {
   } catch (error) {
     console.error("Error fetching footer from Sanity:", error);
     return null;
+  }
+}
+
+//Get video page
+export async function getVideoPage(): Promise<VideoPage | null> {
+  const client = getSanityClient();
+  if (!client) {
+    return null;
+  }
+
+  try {
+    const videoPage = await client.fetch<VideoPage>(videoQuery);
+    return videoPage;
+  } catch (error) {
+    console.error("Error fetching videoPage from Sanity:", error);
+    return null;
+  }
+}
+
+//Get all videos
+export async function getAllVideos(): Promise<Video[]> {
+  const client = getSanityClient();
+  if (!client) {
+    return [];
+  }
+
+  try {
+    const videos = await client.fetch<Video[]>(videoListQuery);
+    return videos;
+  } catch (error) {
+    console.error("Error fetching videos from Sanity:", error);
+    return [];
   }
 }
 

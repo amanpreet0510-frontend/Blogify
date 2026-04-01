@@ -12,30 +12,30 @@ const Footer = async () => {
 
   return (
     <>
-      <footer className="border-t border-border/50 bg-card/30">
+      <footer className="py-10 bg-[#696969] text-[#eeee]">
       <div className='container'>
-        <div className='flex gap-10 mt-10'>
-          <div className='flex'>
+        <div className='flex justify-between gap-10'>
+          <div className='flex gap-10'>
             <div>
-              <img src={footer?.featuredImage} alt="" />
+              <img src={footer?.featuredImage} alt=""/>
             </div>
-            <div className='p-10'>
-              <h1>{footer?.title}</h1>
-              <p className='max-w-xl'>{footer?.description}</p>
-              {footer?.linkColumns.map((column) => (
-                <div className='flex gap-2'>
+            <div className=''>
+              <h1 className='text-2xl'>{footer?.title}</h1>
+              <p className='max-w-sm py-5'>{footer?.description}</p>
+              {footer?.linkColumns.map((column, colIdx) => (
+                <div key={colIdx} className='flex left-0 '>
                   <h1>{column.title}</h1>
-                  {column.links.map((link) => (
-                    <a href={link.url}>{link.label}</a>
+                  {column.links.map((link, linkIdx) => (
+                    <a key={linkIdx} href={link.url}>{link.label}</a>
                   ))}
-                  <FaArrowRight />
+                  <FaArrowRight/>
                 </div>
               ))}
               
             </div>
           </div>
 
-          <div className=''>
+          <div className='flex flex-col gap-5'>
             <h1>{footer?.newsletter.title}</h1>
             <p>{footer?.newsletter.emailLabel}</p>
             <Input type="email" placeholder={footer?.newsletter.placeholder} />
@@ -43,15 +43,15 @@ const Footer = async () => {
             <input type="checkbox" />
             <p>{footer?.newsletter.checkboxText}</p>
             </span>
-            <Button variant={"default"}>{footer?.newsletter.buttonText}</Button>
+            <button className='bg-[#2573DA] p-2 my-5'>{footer?.newsletter.buttonText}</button>
           </div>
 
         </div>
         <div className='flex justify-between'>
           <div><p>{footer?.copyright}</p></div>
-          <div className='flex justify-between gap-10'>
-          {footer?.socialIcons.map((socialLink) => (
-            <div>
+          <div className='flex gap-17'>
+          {footer?.socialIcons.map((socialLink, index) => (
+            <div key={index}>
               <img src={socialLink.iconUrl} alt="" />
             </div>
           ))}

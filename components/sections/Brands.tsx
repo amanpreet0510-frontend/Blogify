@@ -46,13 +46,13 @@ const Brands = ({ brands }: { brands: Brands }) => {
 
   return (
     <>
-    <div className='bg-[#F2F2F2] flex justify-between gap-20 py-5 my-5'>
-      <div className='text-black text-center items-center flex justify-center ps-10 font-bold'>As featured in</div>
-      <hr className='w-1 h-10'/>
-      <div ref={sliderRef} className="keen-slider">
+    <div className='my-5 flex flex-col gap-4 bg-[#F2F2F2] px-4 py-5 sm:flex-row sm:items-center sm:gap-8'>
+      <div className='flex items-center justify-center text-center font-bold text-black sm:justify-start'>As featured in</div>
+      <hr className='hidden h-10 w-px bg-gray-300 sm:block'/>
+      <div ref={sliderRef} className="keen-slider min-w-0 flex-1">
         {brands?.brandLogos?.map((brand, index) => (
           <div key={index} className="keen-slider__slide flex justify-center items-center">
-            <Image src={brand.iconUrl} alt={brand.link || `Brand ${index + 1}`} width={150} height={100} className='object-contain p-1'/>
+            <Image src={brand.iconUrl} alt={brand.link || `Brand ${index + 1}`} width={150} height={100} className='h-auto max-w-full object-contain p-1'/>
           </div>
         ))}
       </div>

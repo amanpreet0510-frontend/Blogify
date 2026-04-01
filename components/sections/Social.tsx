@@ -29,17 +29,17 @@ const Social = ({ social }: { social: Socials }) => {
 
   return (
     <>
-      <div className='flex justify-center gap-30  bg-[rgb(37,115,218)]'>
+      <div className='flex flex-wrap items-center justify-center gap-6 bg-[rgb(37,115,218)] px-4 py-4 sm:gap-10'>
         {social?.socialIcons?.map((item: any, index: number) => (
           <div
             key={index}
-            className=''
+            className='text-center'
           >
-            <div className='flex flex-row'>
+            <div className='flex flex-row justify-center'>
               <img
                 src={item?.iconUrl}
                 alt={item?.title}
-                className='object-contain p-5'
+                className='h-12 w-12 object-contain p-2 sm:h-14 sm:w-14'
               />
 
             </div>

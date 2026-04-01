@@ -14,16 +14,16 @@ const Footer = async () => {
     <>
       <footer className="py-10 bg-[#696969] text-[#eeee]">
       <div className='container'>
-        <div className='flex justify-between gap-10'>
-          <div className='flex gap-10'>
+        <div className='flex flex-col justify-between gap-10 lg:flex-row'>
+          <div className='flex flex-col gap-8 sm:flex-row sm:gap-10'>
             <div>
-              <img src={footer?.featuredImage} alt=""/>
+              <img src={footer?.featuredImage} alt="" className="max-w-full h-auto"/>
             </div>
-            <div className=''>
+            <div className='min-w-0'>
               <h1 className='text-2xl'>{footer?.title}</h1>
               <p className='max-w-sm py-5'>{footer?.description}</p>
               {footer?.linkColumns.map((column, colIdx) => (
-                <div key={colIdx} className='flex left-0 '>
+                <div key={colIdx} className='flex flex-wrap items-center gap-3'>
                   <h1>{column.title}</h1>
                   {column.links.map((link, linkIdx) => (
                     <a key={linkIdx} href={link.url}>{link.label}</a>
@@ -35,7 +35,7 @@ const Footer = async () => {
             </div>
           </div>
 
-          <div className='flex flex-col gap-5'>
+          <div className='flex w-full max-w-md flex-col gap-5'>
             <h1>{footer?.newsletter.title}</h1>
             <p>{footer?.newsletter.emailLabel}</p>
             <Input type="email" placeholder={footer?.newsletter.placeholder} />
@@ -47,12 +47,12 @@ const Footer = async () => {
           </div>
 
         </div>
-        <div className='flex justify-between'>
+        <div className='mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
           <div><p>{footer?.copyright}</p></div>
-          <div className='flex gap-17'>
+          <div className='flex flex-wrap items-center gap-4'>
           {footer?.socialIcons.map((socialLink, index) => (
             <div key={index}>
-              <img src={socialLink.iconUrl} alt="" />
+              <img src={socialLink.iconUrl} alt="" className="h-5 w-5 object-contain" />
             </div>
           ))}
           </div>

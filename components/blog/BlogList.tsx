@@ -101,7 +101,7 @@ export function BlogList({ blogs, categories, showSearch = true }: BlogListProps
         </div>
 
         {/* Active Filters & Results Count */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
           <p className="text-sm text-muted-foreground">
             Showing {filteredBlogs.length} of {blogs.length} articles
           </p>
@@ -121,7 +121,7 @@ export function BlogList({ blogs, categories, showSearch = true }: BlogListProps
 
       {/* Blog Grid */}
       {filteredBlogs.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredBlogs.map((blog) => (
             <BlogCard key={blog._id} blog={blog} height={100} width={100} />
           ))}

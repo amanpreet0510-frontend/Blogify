@@ -16,14 +16,14 @@ export default async function TravelPage() {
     return (
         <div className=" bg-background text-foreground">
            
-                <main key={eatData._id} className=" bg-white text-gray-800 px-6 py-12">
-                    <div className="m-15 mx-auto  flex justify-between gap-15">
+                <main key={eatData._id} className=" bg-white px-6 py-10 text-gray-800 sm:py-12">
+                    <div className="mx-auto flex max-w-6xl justify-between">
                         <div className="container">
                             {/* Heading */}
-                            <h1 className="text-4xl font-bold mb-6">
+                            <h1 className="mb-6 text-3xl font-bold sm:text-4xl">
                                 {eatData.title}
                             </h1>
-                            <p className="max-w-4xl">
+                            <p className="max-w-4xl text-sm sm:text-base">
                                 {eatData.excerpt}
                             </p>
                         </div>

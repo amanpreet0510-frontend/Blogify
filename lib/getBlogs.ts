@@ -25,8 +25,24 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
   }
 
   try {
-    const blogs = await client.fetch<BlogPost[]>(allBlogsQuery);
-    return blogs;
+    const sanityBlogs = await client.fetch<BlogPost[]>(allBlogsQuery);
+    
+    // Combine Sanity blogs with fallback blogs, prioritizing Sanity blogs
+    const fallbackBlogsTyped = fallbackBlogs.blogs as BlogPost[];
+    const combinedBlogs = [...sanityBlogs];
+    
+    // Add fallback blogs that don't exist in Sanity
+    for (const fallbackBlog of fallbackBlogsTyped) {
+      const existsInSanity = sanityBlogs.some(sb => sb.slug?.current === fallbackBlog.slug?.current);
+      if (!existsInSanity) {
+        combinedBlogs.push(fallbackBlog);
+      }
+    }
+    
+    // Sort by published date (newest first)
+    combinedBlogs.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    
+    return combinedBlogs;
   } catch (error) {
     console.error("Error fetching blogs from Sanity:", error);
     return fallbackBlogs.blogs as BlogPost[];
@@ -47,9 +63,19 @@ export async function getBlogBySlug(
     const blog = await client.fetch<BlogPostFull>(blogBySlugQuery, {
       slug,
     });
-    return blog;
+    
+    // If blog exists in Sanity, return it
+    if (blog) {
+      return blog;
+    }
+    
+    // If not found in Sanity, fall back to JSON data
+    console.log(`Blog "${slug}" not found in Sanity, falling back to JSON data`);
+    const fallbackBlog = fallbackBlogs.blogs.find((b) => b.slug.current === slug);
+    return fallbackBlog ? (fallbackBlog as unknown as BlogPostFull) : null;
   } catch (error) {
     console.error("Error fetching blog from Sanity:", error);
+    // On error, fall back to JSON data
     const blog = fallbackBlogs.blogs.find((b) => b.slug.current === slug);
     return blog ? (blog as unknown as BlogPostFull) : null;
   }
@@ -63,8 +89,18 @@ export async function getAllBlogSlugs(): Promise<BlogSlug[]> {
   }
 
   try {
-    const slugs = await client.fetch<BlogSlug[]>(allBlogSlugsQuery);
-    return slugs;
+    const sanitySlugs = await client.fetch<BlogSlug[]>(allBlogSlugsQuery);
+    
+    // Get fallback slugs
+    const fallbackSlugs = fallbackBlogs.blogs.map((b) => ({ slug: b.slug.current }));
+    
+    // Combine and deduplicate slugs
+    const allSlugs = [...sanitySlugs, ...fallbackSlugs];
+    const uniqueSlugs = allSlugs.filter((item, index, self) => 
+      self.findIndex(s => s.slug === item.slug) === index
+    );
+    
+    return uniqueSlugs;
   } catch (error) {
     console.error("Error fetching blog slugs from Sanity:", error);
     return fallbackBlogs.blogs.map((b) => ({ slug: b.slug.current }));

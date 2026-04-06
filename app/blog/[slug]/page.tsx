@@ -17,6 +17,12 @@ interface BlogPageProps {
   }>;
 }
 
+// Enable ISR - revalidate every hour
+export const revalidate = 3600;
+
+// Allow dynamic params for new blog posts
+export const dynamicParams = true;
+
 // Generate static params for all blog posts
 export async function generateStaticParams() {
   const slugs = await getAllBlogSlugs();

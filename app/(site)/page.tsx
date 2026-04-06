@@ -4,6 +4,9 @@ import HeroSection from "@/components/sections/HeroSection";
 import Brands from "@/components/sections/Brands";
 import Social from "@/components/sections/Social";
 
+// Enable ISR for the home page
+export const revalidate = 3600;
+
 // Homepage - displays blog listing with search and category filtering
 export default async function HomePage() {
   const [blogs, categories, pageData] = await Promise.all([

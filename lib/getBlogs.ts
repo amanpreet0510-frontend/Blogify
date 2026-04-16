@@ -25,7 +25,10 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
   }
 
   try {
-    const sanityBlogs = await client.fetch<BlogPost[]>(allBlogsQuery);
+    const sanityBlogs = await client.fetch<BlogPost[]>(allBlogsQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 3600, tags: ['blogs'] }, // Revalidate hourly or on webhook
+    });
     
     // Combine Sanity blogs with fallback blogs, prioritizing Sanity blogs
     const fallbackBlogsTyped = fallbackBlogs.blogs as BlogPost[];
@@ -60,8 +63,9 @@ export async function getBlogBySlug(
   }
 
   try {
-    const blog = await client.fetch<BlogPostFull>(blogBySlugQuery, {
-      slug,
+    const blog = await client.fetch<BlogPostFull>(blogBySlugQuery, { slug }, {
+      cache: 'force-cache',
+      next: { revalidate: 3600, tags: ['blogs', `blog-${slug}`] }, // Revalidate hourly or on webhook
     });
     
     // If blog exists in Sanity, return it
@@ -89,7 +93,10 @@ export async function getAllBlogSlugs(): Promise<BlogSlug[]> {
   }
 
   try {
-    const sanitySlugs = await client.fetch<BlogSlug[]>(allBlogSlugsQuery);
+    const sanitySlugs = await client.fetch<BlogSlug[]>(allBlogSlugsQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['blogs'] }, // Revalidate daily for static generation
+    });
     
     // Get fallback slugs
     const fallbackSlugs = fallbackBlogs.blogs.map((b) => ({ slug: b.slug.current }));
@@ -115,7 +122,10 @@ export async function getAllCategories(): Promise<Category[]> {
   }
 
   try {
-    const categories = await client.fetch<Category[]>(allCategoriesQuery);
+    const categories = await client.fetch<Category[]>(allCategoriesQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['categories'] }, // Revalidate daily
+    });
     return categories;
   } catch (error) {
     console.error("Error fetching categories from Sanity:", error);
@@ -131,7 +141,10 @@ export async function getAboutPage(): Promise<About[]> {
   }
 
   try {
-    const about = await client.fetch<About[]>(allAboutQuery);
+    const about = await client.fetch<About[]>(allAboutQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['about'] }, // Revalidate daily
+    });
     return about;
   } catch (error) {
     console.error("Error fetching aboutPage from Sanity:", error);
@@ -147,7 +160,10 @@ export async function getTravelPage(): Promise<Travel | null> {
   }
 
   try {
-    const travel = await client.fetch<Travel>(travelQuery);
+    const travel = await client.fetch<Travel>(travelQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['travel'] },
+    });
     return travel;
   } catch (error) {
     console.error("Error fetching travelPage from Sanity:", error);
@@ -163,7 +179,10 @@ export async function getEatPage(): Promise<Eat | null> {
   }
 
   try {
-    const eat = await client.fetch<Eat>(eatQuery);
+    const eat = await client.fetch<Eat>(eatQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['eat'] },
+    });
     return eat;
   } catch (error) {
     console.error("Error fetching eatPage from Sanity:", error);
@@ -179,7 +198,10 @@ export async function getHeader(): Promise<Header | null> {
   }
 
   try {
-    const header = await client.fetch<Header>(headerQuery);
+    const header = await client.fetch<Header>(headerQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['header'] },
+    });
     return header;
   } catch (error) {
     console.error("Error fetching header from Sanity:", error);
@@ -193,7 +215,10 @@ export async function getPage(): Promise<Page | null> {
   if (!client) return null;
 
   try {
-    const page = await client.fetch<Page>(pageQuery);
+    const page = await client.fetch<Page>(pageQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['page'] },
+    });
     return page;
   } catch (error) { 
     console.error("Error fetching page:", error);
@@ -209,7 +234,10 @@ export async function getFooter(): Promise<Footer | null> {
   }
 
   try {
-    const footer = await client.fetch<Footer>(footerQuery);
+    const footer = await client.fetch<Footer>(footerQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['footer'] },
+    });
     return footer;
   } catch (error) {
     console.error("Error fetching footer from Sanity:", error);
@@ -225,7 +253,10 @@ export async function getVideoPage(): Promise<VideoPage | null> {
   }
 
   try {
-    const videoPage = await client.fetch<VideoPage>(videoQuery);
+    const videoPage = await client.fetch<VideoPage>(videoQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['video'] },
+    });
     return videoPage;
   } catch (error) {
     console.error("Error fetching videoPage from Sanity:", error);
@@ -241,7 +272,10 @@ export async function getAllVideos(): Promise<Video[]> {
   }
 
   try {
-    const videos = await client.fetch<Video[]>(videoListQuery);
+    const videos = await client.fetch<Video[]>(videoListQuery, {}, {
+      cache: 'force-cache',
+      next: { revalidate: 86400, tags: ['video'] },
+    });
     return videos;
   } catch (error) {
     console.error("Error fetching videos from Sanity:", error);
@@ -266,6 +300,9 @@ export async function getRelatedPosts(
     const posts = await client.fetch<BlogPost[]>(relatedPostsQuery, {
       currentId,
       categoryIds,
+    }, {
+      cache: 'force-cache',
+      next: { revalidate: 3600, tags: ['blogs'] },
     });
     return posts;
   } catch (error) {

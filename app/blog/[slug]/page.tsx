@@ -17,8 +17,9 @@ interface BlogPageProps {
   }>;
 }
 
-// Enable ISR - revalidate every hour
-export const revalidate = 3600;
+// Enable ISR - revalidate every 60 seconds for faster updates
+// Sanity webhooks will trigger on-demand revalidation for instant updates
+export const revalidate = 60;
 
 // Allow dynamic params for new blog posts
 export const dynamicParams = true;
@@ -44,15 +45,32 @@ export async function generateMetadata({
     };
   }
 
+  // Use custom SEO fields if provided, otherwise fallback to defaults
+  const metaTitle = blog.metaTitle || `${blog.title} | DevBlog`;
+  const metaDescription = blog.metaDescription || blog.excerpt || `Read ${blog.title} on DevBlog`;
+  
+  // Use environment variable for site URL, default to empty string for client-side rendering
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://justblogify.in";
+  const canonicalUrl = `${siteUrl}/blog/${slug}`;
+
   return {
-    title: `${blog.title} | DevBlog`,
-    description: blog.excerpt || `Read ${blog.title} on DevBlog`,
+    title: metaTitle,
+    description: metaDescription,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: blog.title,
-      description: blog.excerpt || `Read ${blog.title} on DevBlog`,
+      title: blog.metaTitle || blog.title,
+      description: metaDescription,
       type: "article",
       publishedTime: blog.publishedAt,
       authors: [blog.author],
+      url: canonicalUrl,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metaTitle,
+      description: metaDescription,
     },
   };
 }

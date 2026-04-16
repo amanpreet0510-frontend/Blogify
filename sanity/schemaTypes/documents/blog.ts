@@ -133,6 +133,21 @@ export const blog = defineType({
       description: "Show or hide the search input and category filters on the blog listing page",
       initialValue: true,
     }),
+    // SEO Fields
+    defineField({
+      name: "metaTitle",
+      title: "Meta Title (SEO)",
+      type: "string",
+      description: "SEO title tag. Leave empty to use the blog title. Recommended: 50-60 characters",
+      validation: (Rule) => Rule.max(100),
+    }),
+    defineField({
+      name: "metaDescription",
+      title: "Meta Description (SEO)",
+      type: "text",
+      description: "SEO meta description. Leave empty to use the excerpt. Recommended: 150-160 characters",
+      validation: (Rule) => Rule.max(190),
+    }),
   ],
   preview: {
     select: {

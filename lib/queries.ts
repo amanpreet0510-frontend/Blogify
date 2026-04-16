@@ -15,7 +15,8 @@ export const allBlogsQuery = `
       title,
       slug
     },
-    showSearch
+    showSearch,
+    metaDescription
   }
 `;
 
@@ -35,7 +36,9 @@ export const blogBySlugQuery = `
       title,
       slug
     },
-    showSearch
+    showSearch,
+    metaTitle,
+    metaDescription
   }
 `;
 
@@ -61,7 +64,8 @@ export const blogsByCategoryQuery = `
       title,
       slug
     },
-    showSearch
+    showSearch,
+    metaDescription
   }
 `;
 
@@ -84,7 +88,8 @@ export const relatedPostsQuery = `
     excerpt,
     featuredImage,
     publishedAt,
-    author
+    author,
+    metaDescription
   }
 `;
 
@@ -103,7 +108,8 @@ export const searchBlogsQuery = `
       title,
       slug
     },
-    showSearch
+    showSearch,
+    metaDescription
   }
 `;
 

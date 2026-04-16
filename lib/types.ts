@@ -21,6 +21,8 @@ export interface BlogPost {
   author: string;
   categories?: Category[];
   showSearch?: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 // Full blog type with content

@@ -23,7 +23,7 @@ export function BlogCard({ blog }: BlogCardProps) {
 
   return (
     <Link href={`/blog/${blog.slug.current}`}>
-      <Card className="group h-full overflow-hidden backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+      <Card className="group h-full overflow-hidden border border-white/10 bg-card/70 backdrop-blur-md transition-all duration-500 hover:border-primary/35 hover:shadow-[0_0_40px_-12px_var(--epic-glow)]">
         {/* Featured Image */}
         <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
           {blog.featuredImage ? (
@@ -59,7 +59,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           )}
 
           {/* Title */}
-          <h2 className="mb-2 line-clamp-2 text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+          <h2 className="font-condensed mb-2 line-clamp-2 text-xl font-bold leading-snug tracking-wide text-foreground transition-colors group-hover:text-primary">
             {blog.title}
           </h2>
 

@@ -29,7 +29,7 @@ const Social = ({ social }: { social: Socials }) => {
 
   return (
     <>
-      <div className='flex flex-wrap items-center justify-center gap-6 bg-[rgb(37,115,218)] px-4 py-4 sm:gap-10'>
+      <div className="flex flex-wrap items-center justify-center gap-6 border-y border-white/10 bg-gradient-to-r from-card via-secondary/80 to-card px-4 py-6 sm:gap-10">
         {social?.socialIcons?.map((item: any, index: number) => (
           <div
             key={index}
@@ -43,7 +43,7 @@ const Social = ({ social }: { social: Socials }) => {
               />
 
             </div>
-            <p className='text-white'>{item?.title}</p>
+            <p className="text-sm font-medium text-foreground/90">{item?.title}</p>
           </div>
         ))}</div>
       <div ref={ref} className="keen-slider">

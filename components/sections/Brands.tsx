@@ -46,9 +46,12 @@ const Brands = ({ brands }: { brands: Brands }) => {
 
   return (
     <>
-    <div className='my-5 flex flex-col gap-4 bg-[#F2F2F2] px-4 py-5 sm:flex-row sm:items-center sm:gap-8'>
-      <div className='flex items-center justify-center text-center font-bold text-black sm:justify-start'>As featured in</div>
-      <hr className='hidden h-10 w-px bg-gray-300 sm:block'/>
+    <div className="relative left-1/2 my-10 w-screen max-w-[100vw] -translate-x-1/2">
+    <div className="mx-auto flex max-w-[1280px] flex-col gap-4 border-y border-white/10 bg-card/70 px-4 py-8 backdrop-blur-sm sm:flex-row sm:items-center sm:gap-8 sm:px-6">
+      <div className="font-condensed flex items-center justify-center text-center text-xs font-bold uppercase tracking-[0.28em] text-muted-foreground sm:justify-start">
+        As featured in
+      </div>
+      <hr className="hidden h-10 w-px bg-white/15 sm:block" />
       <div ref={sliderRef} className="keen-slider min-w-0 flex-1">
         {brands?.brandLogos?.map((brand, index) => (
           <div key={index} className="keen-slider__slide flex justify-center items-center">
@@ -56,6 +59,7 @@ const Brands = ({ brands }: { brands: Brands }) => {
           </div>
         ))}
       </div>
+    </div>
     </div>
     </>
   )

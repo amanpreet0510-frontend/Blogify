@@ -12,7 +12,7 @@ const Footer = async () => {
 
   return (
     <>
-      <footer className="py-10 bg-[#696969] text-[#eeee]">
+      <footer className="border-t border-white/10 bg-gradient-to-b from-card/80 to-background py-12 text-foreground">
       <div className='container'>
         <div className='flex flex-col justify-between gap-10 lg:flex-row'>
           <div className='flex flex-col gap-8 sm:flex-row sm:gap-10'>
@@ -43,7 +43,12 @@ const Footer = async () => {
             <input type="checkbox" />
             <p>{footer?.newsletter.checkboxText}</p>
             </span>
-            <button className='bg-[#2573DA] p-2 my-5'>{footer?.newsletter.buttonText}</button>
+            <button
+              type="button"
+              className="my-5 border border-primary/30 bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-8px_var(--epic-glow)] transition hover:border-primary/50 hover:brightness-110"
+            >
+              {footer?.newsletter.buttonText}
+            </button>
           </div>
 
         </div>

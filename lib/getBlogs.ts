@@ -29,23 +29,14 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
       cache: 'force-cache',
       next: { revalidate: 3600, tags: ['blogs'] }, // Revalidate hourly or on webhook
     });
-    
-    // Combine Sanity blogs with fallback blogs, prioritizing Sanity blogs
-    const fallbackBlogsTyped = fallbackBlogs.blogs as BlogPost[];
-    const combinedBlogs = [...sanityBlogs];
-    
-    // Add fallback blogs that don't exist in Sanity
-    for (const fallbackBlog of fallbackBlogsTyped) {
-      const existsInSanity = sanityBlogs.some(sb => sb.slug?.current === fallbackBlog.slug?.current);
-      if (!existsInSanity) {
-        combinedBlogs.push(fallbackBlog);
-      }
+
+    // Primary behavior: use Sanity data when available.
+    if (Array.isArray(sanityBlogs) && sanityBlogs.length > 0) {
+      return sanityBlogs;
     }
-    
-    // Sort by published date (newest first)
-    combinedBlogs.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-    
-    return combinedBlogs;
+
+    // Fallback only when Sanity is unavailable or returns no usable blogs.
+    return fallbackBlogs.blogs as BlogPost[];
   } catch (error) {
     console.error("Error fetching blogs from Sanity:", error);
     return fallbackBlogs.blogs as BlogPost[];
@@ -67,16 +58,14 @@ export async function getBlogBySlug(
       cache: 'force-cache',
       next: { revalidate: 3600, tags: ['blogs', `blog-${slug}`] }, // Revalidate hourly or on webhook
     });
-    
-    // If blog exists in Sanity, return it
+
+    // Primary behavior: return Sanity content only.
     if (blog) {
       return blog;
     }
-    
-    // If not found in Sanity, fall back to JSON data
-    console.log(`Blog "${slug}" not found in Sanity, falling back to JSON data`);
-    const fallbackBlog = fallbackBlogs.blogs.find((b) => b.slug.current === slug);
-    return fallbackBlog ? (fallbackBlog as unknown as BlogPostFull) : null;
+
+    // Sanity is reachable but post does not exist there.
+    return null;
   } catch (error) {
     console.error("Error fetching blog from Sanity:", error);
     // On error, fall back to JSON data
@@ -97,17 +86,14 @@ export async function getAllBlogSlugs(): Promise<BlogSlug[]> {
       cache: 'force-cache',
       next: { revalidate: 86400, tags: ['blogs'] }, // Revalidate daily for static generation
     });
-    
-    // Get fallback slugs
-    const fallbackSlugs = fallbackBlogs.blogs.map((b) => ({ slug: b.slug.current }));
-    
-    // Combine and deduplicate slugs
-    const allSlugs = [...sanitySlugs, ...fallbackSlugs];
-    const uniqueSlugs = allSlugs.filter((item, index, self) => 
-      self.findIndex(s => s.slug === item.slug) === index
-    );
-    
-    return uniqueSlugs;
+
+    // Primary behavior: use Sanity slugs when available.
+    if (Array.isArray(sanitySlugs) && sanitySlugs.length > 0) {
+      return sanitySlugs;
+    }
+
+    // Fallback only when Sanity is unavailable or returns no usable slugs.
+    return fallbackBlogs.blogs.map((b) => ({ slug: b.slug.current }));
   } catch (error) {
     console.error("Error fetching blog slugs from Sanity:", error);
     return fallbackBlogs.blogs.map((b) => ({ slug: b.slug.current }));

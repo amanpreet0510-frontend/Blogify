@@ -45,7 +45,8 @@ export function BlogList({ blogs, categories, showSearch = true }: BlogListProps
   const hasActiveFilters = searchQuery !== "" || selectedCategory !== null;
 
   return (
-    <div className="container">
+    <section id="articles" className="scroll-mt-24 border-t border-white/10">
+    <div className="container pb-20 pt-12 sm:pt-16">
       {/* Search and Filter Section */}
       {showSearch !== false && <div className="space-y-4">
         {/* Search Input */}
@@ -56,7 +57,7 @@ export function BlogList({ blogs, categories, showSearch = true }: BlogListProps
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-secondary/50 pl-10 placeholder:text-muted-foreground/60"
+            className="border-white/10 bg-secondary/40 pl-10 placeholder:text-muted-foreground/60 focus-visible:ring-primary/40"
           />
           {searchQuery && (
             <button
@@ -141,5 +142,6 @@ export function BlogList({ blogs, categories, showSearch = true }: BlogListProps
         </div>
       )}
     </div>
+    </section>
   );
 }

@@ -2,7 +2,12 @@
 
 // Get all blogs with essential fields
 export const allBlogsQuery = `
-  *[_type == "blog"] | order(publishedAt desc) {
+  *[
+    _type == "blog" &&
+    defined(slug.current) &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -22,7 +27,12 @@ export const allBlogsQuery = `
 
 // Get a single blog by slug with full content
 export const blogBySlugQuery = `
-  *[_type == "blog" && slug.current == $slug][0] {
+  *[
+    _type == "blog" &&
+    slug.current == $slug &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ][0] {
     _id,
     title,
     slug,
@@ -44,14 +54,25 @@ export const blogBySlugQuery = `
 
 // Get all blog slugs for static generation
 export const allBlogSlugsQuery = `
-  *[_type == "blog"] {
+  *[
+    _type == "blog" &&
+    defined(slug.current) &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ] {
     "slug": slug.current
   }
 `;
 
 // Get blogs by category
 export const blogsByCategoryQuery = `
-  *[_type == "blog" && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
+  *[
+    _type == "blog" &&
+    $categorySlug in categories[]->slug.current &&
+    defined(slug.current) &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -81,7 +102,14 @@ export const allCategoriesQuery = `
 
 // Get related posts (same category, excluding current post)
 export const relatedPostsQuery = `
-  *[_type == "blog" && _id != $currentId && count(categories[@._ref in $categoryIds]) > 0] | order(publishedAt desc)[0...3] {
+  *[
+    _type == "blog" &&
+    _id != $currentId &&
+    count(categories[@._ref in $categoryIds]) > 0 &&
+    defined(slug.current) &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ] | order(publishedAt desc)[0...3] {
     _id,
     title,
     slug,
@@ -95,7 +123,13 @@ export const relatedPostsQuery = `
 
 // Search blogs by title or excerpt
 export const searchBlogsQuery = `
-  *[_type == "blog" && (title match $searchTerm || excerpt match $searchTerm)] | order(publishedAt desc) {
+  *[
+    _type == "blog" &&
+    (title match $searchTerm || excerpt match $searchTerm) &&
+    defined(slug.current) &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ] | order(publishedAt desc) {
     _id,
     title,
     slug,

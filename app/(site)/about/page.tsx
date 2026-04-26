@@ -8,14 +8,12 @@ export default async function AboutPage() {
     getAboutPage()
   ]);
 
-  console.log('aboutData', aboutData)
-
   return (
     <div className=" bg-background text-foreground">
       {aboutData?.map((item) => (
-        <main key={item._id} className=" bg-white px-6 py-10 text-gray-800 sm:py-12">
-          <div className="mx-auto flex max-w-5xl flex-col justify-between gap-8 lg:flex-row lg:gap-12">
-            <div>
+        <main key={item._id} className="bg-white px-6 py-10 text-gray-800 sm:py-12">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:gap-12">
+            <div className="min-w-0">
               {/* Heading */}
               <h1 className="mb-6 text-3xl font-bold sm:text-4xl">
                 {item?.title}
@@ -23,30 +21,30 @@ export default async function AboutPage() {
 
               {/* Main Content (Rich Text) */}
               {item?.content && (
-                <section className="prose prose-blue mt-8 max-w-none lg:max-w-sm">
+                <section className="prose prose-blue mt-8 max-w-none">
                   <BlogContent content={item.content} />
                 </section>
               )}
             </div>
-            <div>
+            <div className="w-full lg:sticky lg:top-24">
               {/* Featured Image */}
               {item?.featuredImage && (
-                <div className="relative mb-8 mt-4 w-full overflow-hidden shadow-lg lg:mt-20">
+                <div className="relative mb-8 mt-4 w-full overflow-hidden rounded-xl bg-muted shadow-lg">
                   <Image
-                    src={typeof item.featuredImage === 'string' ? item.featuredImage : ""}
+                    src={typeof item.featuredImage === "string" ? item.featuredImage : ""}
                     alt={item.title}
-                    className="h-auto w-full object-cover"
+                    className="h-auto max-h-[70vh] w-full object-contain"
                     priority
-                    height={500}
-                    width={500}
+                    height={1200}
+                    width={1200}
                   />
                 </div>
               )}
             </div>
-            </div>
+          </div>
             {/* Mission / Description */}
             {item?.description && (
-              <section className="mt-8 mb-12">
+              <section className="mx-auto mt-8 mb-12 max-w-5xl">
                 <p className="text-lg leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>

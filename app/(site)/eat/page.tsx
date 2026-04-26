@@ -1,17 +1,18 @@
 import { BlogList } from "@/components/blog/BlogList";
-import { getAllBlogs, getAllCategories, getEatPage } from "@/lib/getBlogs";
+import { getAllCategories, getEatPage } from "@/lib/getBlogs";
 
 
-export default async function TravelPage() {
-    const [eatData,blogs,categories] = await Promise.all([
+export default async function EatPage() {
+    const [eatData, categories] = await Promise.all([
         getEatPage(),
-        getAllBlogs(),
         getAllCategories()
     ]);
 
     if (!eatData) {
         return <div>Loading...</div>; // Or some other fallback
     }
+
+    const eatBlogs = eatData.blogs ?? [];
 
     return (
         <div className=" bg-background text-foreground">
@@ -28,7 +29,11 @@ export default async function TravelPage() {
                             </p>
                         </div>
                         </div>
-                        <BlogList blogs={blogs} categories={categories} showSearch={blogs[0]?.showSearch} />
+                        <BlogList
+                          blogs={eatBlogs}
+                          categories={categories}
+                          showSearch={eatBlogs[0]?.showSearch}
+                        />
                     
                 </main>
            

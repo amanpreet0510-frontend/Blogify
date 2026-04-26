@@ -1,14 +1,10 @@
-import React from "react";
-import { BlogContent } from "@/components/blog/BlogContent";
 import { getTravelPage } from "@/lib/getBlogs";
-import Image from "next/image";
 import { BlogList } from "@/components/blog/BlogList";
-import { getAllBlogs, getAllCategories, getPage } from "@/lib/getBlogs";
+import { getAllCategories } from "@/lib/getBlogs";
 
 export default async function TravelPage() {
-    const [travelData,blogs,categories] = await Promise.all([
+    const [travelData, categories] = await Promise.all([
         getTravelPage(),
-        getAllBlogs(),
         getAllCategories()
     ]);
 
@@ -17,6 +13,8 @@ export default async function TravelPage() {
     if (!travelData) {
         return <div>Loading...</div>; 
     }
+
+    const travelBlogs = travelData.blogs ?? [];
 
     return (
         <div className=" bg-background text-foreground">
@@ -33,7 +31,11 @@ export default async function TravelPage() {
                             </p>
                         </div>
                         </div>
-                        <BlogList blogs={blogs} categories={categories} showSearch={blogs[0]?.showSearch} />
+                        <BlogList
+                          blogs={travelBlogs}
+                          categories={categories}
+                          showSearch={travelBlogs[0]?.showSearch}
+                        />
                 </main>
         </div>
     );

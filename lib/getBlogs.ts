@@ -17,6 +17,28 @@ import {
 import type { BlogPost, BlogPostFull, BlogSlug, Category,About,Header,Herosection,Brands,Page,Footer,Travel,Eat,Video,VideoPage } from "./types";
 import fallbackBlogs from "@/data/blogs.json";
 
+type SanityFetchOptions = {
+  cache: "no-store" | "force-cache";
+  next?: { revalidate: number; tags?: string[] };
+};
+
+function getSanityFetchOptions(
+  revalidate: number,
+  tags: string[] = [],
+  mode: "default" | "always-fresh" = "default"
+): SanityFetchOptions {
+  if (mode === "always-fresh") {
+    return { cache: "no-store" };
+  }
+
+  // In development, bypass cache so Studio edits appear immediately.
+  if (process.env.NODE_ENV !== "production") {
+    return { cache: "no-store" };
+  }
+
+  return { cache: "force-cache", next: { revalidate, tags } };
+}
+
 // Get all blogs with CMS fallback
 export async function getAllBlogs(): Promise<BlogPost[]> {
   const client = getSanityClient();
@@ -25,10 +47,11 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
   }
 
   try {
-    const sanityBlogs = await client.fetch<BlogPost[]>(allBlogsQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 3600, tags: ['blogs'] }, // Revalidate hourly or on webhook
-    });
+    const sanityBlogs = await client.fetch<BlogPost[]>(
+      allBlogsQuery,
+      {},
+      getSanityFetchOptions(3600, ["blogs"], "always-fresh")
+    );
 
     // Primary behavior: use Sanity data when available.
     if (Array.isArray(sanityBlogs) && sanityBlogs.length > 0) {
@@ -54,10 +77,11 @@ export async function getBlogBySlug(
   }
 
   try {
-    const blog = await client.fetch<BlogPostFull>(blogBySlugQuery, { slug }, {
-      cache: 'force-cache',
-      next: { revalidate: 3600, tags: ['blogs', `blog-${slug}`] }, // Revalidate hourly or on webhook
-    });
+    const blog = await client.fetch<BlogPostFull>(
+      blogBySlugQuery,
+      { slug },
+      getSanityFetchOptions(3600, ["blogs", `blog-${slug}`], "always-fresh")
+    );
 
     // Primary behavior: return Sanity content only.
     if (blog) {
@@ -82,10 +106,11 @@ export async function getAllBlogSlugs(): Promise<BlogSlug[]> {
   }
 
   try {
-    const sanitySlugs = await client.fetch<BlogSlug[]>(allBlogSlugsQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['blogs'] }, // Revalidate daily for static generation
-    });
+    const sanitySlugs = await client.fetch<BlogSlug[]>(
+      allBlogSlugsQuery,
+      {},
+      getSanityFetchOptions(86400, ["blogs"]) // Revalidate daily for static generation
+    );
 
     // Primary behavior: use Sanity slugs when available.
     if (Array.isArray(sanitySlugs) && sanitySlugs.length > 0) {
@@ -108,10 +133,11 @@ export async function getAllCategories(): Promise<Category[]> {
   }
 
   try {
-    const categories = await client.fetch<Category[]>(allCategoriesQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['categories'] }, // Revalidate daily
-    });
+    const categories = await client.fetch<Category[]>(
+      allCategoriesQuery,
+      {},
+      getSanityFetchOptions(86400, ["categories"]) // Revalidate daily
+    );
     return categories;
   } catch (error) {
     console.error("Error fetching categories from Sanity:", error);
@@ -127,10 +153,11 @@ export async function getAboutPage(): Promise<About[]> {
   }
 
   try {
-    const about = await client.fetch<About[]>(allAboutQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['about'] }, // Revalidate daily
-    });
+    const about = await client.fetch<About[]>(
+      allAboutQuery,
+      {},
+      getSanityFetchOptions(86400, ["about"]) // Revalidate daily
+    );
     return about;
   } catch (error) {
     console.error("Error fetching aboutPage from Sanity:", error);
@@ -146,10 +173,11 @@ export async function getTravelPage(): Promise<Travel | null> {
   }
 
   try {
-    const travel = await client.fetch<Travel>(travelQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['travel'] },
-    });
+    const travel = await client.fetch<Travel>(
+      travelQuery,
+      {},
+      getSanityFetchOptions(86400, ["travel"])
+    );
     return travel;
   } catch (error) {
     console.error("Error fetching travelPage from Sanity:", error);
@@ -165,10 +193,11 @@ export async function getEatPage(): Promise<Eat | null> {
   }
 
   try {
-    const eat = await client.fetch<Eat>(eatQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['eat'] },
-    });
+    const eat = await client.fetch<Eat>(
+      eatQuery,
+      {},
+      getSanityFetchOptions(86400, ["eat"])
+    );
     return eat;
   } catch (error) {
     console.error("Error fetching eatPage from Sanity:", error);
@@ -184,10 +213,11 @@ export async function getHeader(): Promise<Header | null> {
   }
 
   try {
-    const header = await client.fetch<Header>(headerQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['header'] },
-    });
+    const header = await client.fetch<Header>(
+      headerQuery,
+      {},
+      getSanityFetchOptions(86400, ["header"])
+    );
     return header;
   } catch (error) {
     console.error("Error fetching header from Sanity:", error);
@@ -201,10 +231,11 @@ export async function getPage(): Promise<Page | null> {
   if (!client) return null;
 
   try {
-    const page = await client.fetch<Page>(pageQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['page'] },
-    });
+    const page = await client.fetch<Page>(
+      pageQuery,
+      {},
+      getSanityFetchOptions(86400, ["page"])
+    );
     return page;
   } catch (error) { 
     console.error("Error fetching page:", error);
@@ -220,10 +251,11 @@ export async function getFooter(): Promise<Footer | null> {
   }
 
   try {
-    const footer = await client.fetch<Footer>(footerQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['footer'] },
-    });
+    const footer = await client.fetch<Footer>(
+      footerQuery,
+      {},
+      getSanityFetchOptions(86400, ["footer"])
+    );
     return footer;
   } catch (error) {
     console.error("Error fetching footer from Sanity:", error);
@@ -239,10 +271,11 @@ export async function getVideoPage(): Promise<VideoPage | null> {
   }
 
   try {
-    const videoPage = await client.fetch<VideoPage>(videoQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['video'] },
-    });
+    const videoPage = await client.fetch<VideoPage>(
+      videoQuery,
+      {},
+      getSanityFetchOptions(86400, ["video"])
+    );
     return videoPage;
   } catch (error) {
     console.error("Error fetching videoPage from Sanity:", error);
@@ -258,10 +291,11 @@ export async function getAllVideos(): Promise<Video[]> {
   }
 
   try {
-    const videos = await client.fetch<Video[]>(videoListQuery, {}, {
-      cache: 'force-cache',
-      next: { revalidate: 86400, tags: ['video'] },
-    });
+    const videos = await client.fetch<Video[]>(
+      videoListQuery,
+      {},
+      getSanityFetchOptions(86400, ["video"])
+    );
     return videos;
   } catch (error) {
     console.error("Error fetching videos from Sanity:", error);
@@ -283,13 +317,14 @@ export async function getRelatedPosts(
   }
 
   try {
-    const posts = await client.fetch<BlogPost[]>(relatedPostsQuery, {
-      currentId,
-      categoryIds,
-    }, {
-      cache: 'force-cache',
-      next: { revalidate: 3600, tags: ['blogs'] },
-    });
+    const posts = await client.fetch<BlogPost[]>(
+      relatedPostsQuery,
+      {
+        currentId,
+        categoryIds,
+      },
+      getSanityFetchOptions(3600, ["blogs"], "always-fresh")
+    );
     return posts;
   } catch (error) {
     console.error("Error fetching related posts from Sanity:", error);

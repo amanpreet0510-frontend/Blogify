@@ -17,9 +17,8 @@ interface BlogPageProps {
   }>;
 }
 
-// Enable ISR - revalidate every 60 seconds for faster updates
-// Sanity webhooks will trigger on-demand revalidation for instant updates
-export const revalidate = 60;
+// Always render dynamically so post edits appear immediately.
+export const dynamic = "force-dynamic";
 
 // Allow dynamic params for new blog posts
 export const dynamicParams = true;

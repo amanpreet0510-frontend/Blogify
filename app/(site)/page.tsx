@@ -9,8 +9,8 @@ import HeroSection from "@/components/sections/HeroSection";
 import Brands from "@/components/sections/Brands";
 import type { Header } from "@/lib/types";
 
-// Enable ISR for the home page
-export const revalidate = 3600;
+// Always render dynamically so latest blogs appear immediately.
+export const dynamic = "force-dynamic";
 
 /** Second hero button reuses another CMS nav link when it differs from the primary CTA. */
 function pickHeroSecondary(header: Header | null) {
